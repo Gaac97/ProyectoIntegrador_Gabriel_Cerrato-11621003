@@ -44,6 +44,16 @@ public class ProyectoIntegrador2 {
                 int i2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
                 int i3 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
                 int i4 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                   try {
+                    validar(m, i, i2);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                try {
+                    validar(m, i3, i4);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }else{
                 
                 JOptionPane.showMessageDialog(null, "Turno de los negros:" + " " + player2);
