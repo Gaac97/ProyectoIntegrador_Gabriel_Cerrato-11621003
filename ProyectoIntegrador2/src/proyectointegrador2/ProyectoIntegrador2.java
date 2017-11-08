@@ -5,6 +5,8 @@
  */
 package proyectointegrador2;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gabriel Alvarado
@@ -21,6 +23,38 @@ public class ProyectoIntegrador2 {
         String player1;
         String player2;
         Piezas m[][] = new Piezas[8][8];
+    
+
+       
+        LlenarTablero(m);
+
+        player1 = JOptionPane.showInputDialog("Ingrese el nombre del primer jugador");
+        player2 = JOptionPane.showInputDialog("Ingrese el nombre del segundo jugador");
+
+        while (finish == false) {
+            System.out.println("\n");
+            PrintMatriz(m, 0, 0);
+            if (cont % 2 == 0) {
+
+                JOptionPane.showMessageDialog(null, "Turno de los Blancos:" + " " + player1);
+
+             
+
+                int i = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada x"));
+                int i2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
+                int i3 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                int i4 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+            }else{
+                
+                JOptionPane.showMessageDialog(null, "Turno de los negros:" + " " + player2);
+                System.out.println("\n");
+
+                int i = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada x"));
+                int i2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
+                int i3 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                int i4 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+            }
+        }
     }
     
     
@@ -128,6 +162,14 @@ public class ProyectoIntegrador2 {
 
         }
 
+    }
+    
+     public static void validar(Piezas matriz[][], int x, int y) throws MiException {
+        int limit = matriz.length - 1;
+        int limit2 = matriz[0].length - 1;
+        if (x > limit || y > limit2) {
+            throw new MiException("Se salio del limite");
+        }
     }
     
 }
