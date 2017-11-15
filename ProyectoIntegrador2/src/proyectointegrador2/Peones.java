@@ -9,7 +9,9 @@ package proyectointegrador2;
  *
  * @author Gabriel Alvarado
  */
-public class Peones extends Piezas{
+public class Peones extends Piezas {
+
+    int cont = 0;
 
     @Override
     public String toString() {
@@ -17,26 +19,39 @@ public class Peones extends Piezas{
     }
 
     @Override
-    public boolean movimiento(String forma, int x, int y, Piezas[][] m, int a, int b) {
-       int cont=0;
-        if (cont==0) {
-            return true;
-            
-        }else{
-            return false;
+    public int movimiento(String forma, int x, int y, Piezas[][] m, int a, int b) {
+        cont = 0;
+        if (cont == 0) {
+            if (a - b == a) {
+                return 1;
+            } else {
+                return 2;
+            }
+        } else {
+            return 2;
         }
-        
-       
-        
-    
     }
 
     @Override
-    public boolean comer(int x, int y, Piezas[][] m, int a, int b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int comer(int x, int y, Piezas[][] m, int a, int b) {
+        int suma = a + b;
+        int resta = a - b;
+        int d = (a - 1) + b + 1;
+        int q = (a - 1) + b;
+        boolean evaluar = true;
+        if (cont == 0) {
+            if (q == suma) {
+                if ((a - 1) + (b + 1) == d) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            } else {
+                return 2;
+            }
+        } else {
+            return 2;
+        }
 
-    
-    
-    
+    }
 }
