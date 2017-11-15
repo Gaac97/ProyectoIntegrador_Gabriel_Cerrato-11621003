@@ -16,6 +16,26 @@ public class Peones extends Piezas{
         return "♟";
     }
 
+    @Override
+    public boolean movimiento(String forma, int x, int y, Piezas[][] m, int a, int b) {
+       int cont=0;
+        if (cont==0) {
+            return true;
+            
+        }else{
+            return false;
+        }
+        
+       
+        
+    
+    }
+
+    @Override
+    public boolean comer(int x, int y, Piezas[][] m, int a, int b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     
     

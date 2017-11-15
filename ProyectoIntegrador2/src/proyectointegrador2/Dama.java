@@ -9,7 +9,7 @@ package proyectointegrador2;
  *
  * @author Gabriel Alvarado
  */
-public class Dama extends Piezas{
+public class Dama extends Piezas {
 
     @Override
     public String toString() {

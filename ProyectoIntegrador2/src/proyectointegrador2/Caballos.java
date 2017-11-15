@@ -5,6 +5,8 @@
  */
 package proyectointegrador2;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gabriel Alvarado
@@ -15,7 +17,7 @@ public class Caballos extends Piezas{
     public String toString() {
         return "♞";
     }
-
+   
   
     
 }
