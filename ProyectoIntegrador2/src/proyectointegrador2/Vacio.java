@@ -15,5 +15,15 @@ public class Vacio extends Piezas {
     public String toString() {
         return " ";
     }
+
+    @Override
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean comer(int f, int c, int dc, int dr, Piezas[][] m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

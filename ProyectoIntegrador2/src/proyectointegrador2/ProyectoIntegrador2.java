@@ -13,19 +13,24 @@ import javax.swing.JOptionPane;
  */
 public class ProyectoIntegrador2 {
 
-    static int cont=0;
-    
+    static int cont = 0;
+
     public static void main(String[] args) {
-    int turno;
+        Torres t = new Torres();
+        Dama d = new Dama();
+        Caballos ca = new Caballos();
+        Rey r = new Rey();
+        Peones p = new Peones();
+        Alfiles a = new Alfiles();
+
+        int turno;
         int cont = 0;
         boolean turn = false;
         boolean finish = false;
         String player1;
         String player2;
         Piezas m[][] = new Piezas[8][8];
-    
 
-       
         LlenarTablero(m);
 
         player1 = JOptionPane.showInputDialog("Ingrese el nombre del primer jugador");
@@ -38,24 +43,48 @@ public class ProyectoIntegrador2 {
 
                 JOptionPane.showMessageDialog(null, "Turno de los Blancos:" + " " + player1);
 
-             
+                int f = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada x"));
+                int c = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
+                int dr = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                int dc = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
 
-                int i = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada x"));
-                int i2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
-                int i3 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
-                int i4 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
-                   try {
-                    validar(m, i, i2);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                if (m[f][c] instanceof Torres) {
+                    t.movimiento(f, c, dc, dr, m);
+                    m[f][c] = new Vacio();
+                    m[dr][dc] = new Torres();
+                } else if (m[f][c] instanceof Caballos) {
+                    ca.movimiento(f, c, dc, dr, m);
+
+                    m[f][c] = new Vacio();
+                    m[dr][dc] = new Caballos();
+                    
+                } else if (m[f][c] instanceof Alfiles) {
+                    a.movimiento(f, c, dc, dr, m);
+                    m[f][c] = new Vacio();
+                    m[dr][dc] = new Alfiles();
+
+                } else if (m[f][c] instanceof Peones) {
+                    p.movimiento(f, c, dc, dr, m);
+                    m[f][c] = new Vacio();
+                    m[dr][dc] = new Peones();
+
                 }
-                try {
-                    validar(m, i3, i4);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                {
+                    {
+                    }
+                    try {
+                        validar(m, f, c);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    try {
+                        validar(m, dr, dc);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
-            }else{
-                
+            } else {
+
                 JOptionPane.showMessageDialog(null, "Turno de los negros:" + " " + player2);
                 System.out.println("\n");
 
@@ -65,19 +94,25 @@ public class ProyectoIntegrador2 {
                 int i4 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
             }
         }
+    
     }
+
+
     
     
+
     
-    public static void LlenarTablero(Piezas m[][])
-    {
+
+    
+
+    public static void LlenarTablero(Piezas m[][]) {
         Rey r = new Rey();
         Dama d = new Dama();
         Alfiles a = new Alfiles();
         Caballos c = new Caballos();
         Torres t = new Torres();
         Peones p = new Peones();
-        
+
         m[0][0] = new Torres();
         m[0][1] = new Caballos();
         m[0][2] = new Alfiles();
@@ -86,7 +121,7 @@ public class ProyectoIntegrador2 {
         m[0][5] = new Alfiles();
         m[0][6] = new Caballos();
         m[0][7] = new Torres();
-        
+
         m[1][0] = new Peones();
         m[1][1] = new Peones();
         m[1][2] = new Peones();
@@ -95,8 +130,7 @@ public class ProyectoIntegrador2 {
         m[1][5] = new Peones();
         m[1][6] = new Peones();
         m[1][7] = new Peones();
-        
-        
+
         m[2][0] = new Vacio();
         m[2][1] = new Vacio();
         m[2][2] = new Vacio();
@@ -105,8 +139,7 @@ public class ProyectoIntegrador2 {
         m[2][5] = new Vacio();
         m[2][6] = new Vacio();
         m[2][7] = new Vacio();
-        
-        
+
         m[3][0] = new Vacio();
         m[3][1] = new Vacio();
         m[3][2] = new Vacio();
@@ -115,8 +148,7 @@ public class ProyectoIntegrador2 {
         m[3][5] = new Vacio();
         m[3][6] = new Vacio();
         m[3][7] = new Vacio();
-        
-        
+
         m[4][0] = new Vacio();
         m[4][1] = new Vacio();
         m[4][2] = new Vacio();
@@ -125,7 +157,7 @@ public class ProyectoIntegrador2 {
         m[4][5] = new Vacio();
         m[4][6] = new Vacio();
         m[4][7] = new Vacio();
-        
+
         m[5][0] = new Vacio();
         m[5][1] = new Vacio();
         m[5][2] = new Vacio();
@@ -134,7 +166,7 @@ public class ProyectoIntegrador2 {
         m[5][5] = new Vacio();
         m[5][6] = new Vacio();
         m[5][7] = new Vacio();
-        
+
         m[6][0] = new Peones();
         m[6][1] = new Peones();
         m[6][2] = new Peones();
@@ -143,8 +175,7 @@ public class ProyectoIntegrador2 {
         m[6][5] = new Peones();
         m[6][6] = new Peones();
         m[6][7] = new Peones();
-        
-         
+
         m[7][0] = new Torres();
         m[7][1] = new Caballos();
         m[7][2] = new Alfiles();
@@ -153,10 +184,9 @@ public class ProyectoIntegrador2 {
         m[7][5] = new Alfiles();
         m[7][6] = new Caballos();
         m[7][7] = new Torres();
-        
-        
+
     }
-    
+
     public static void PrintMatriz(Piezas x[][], int f, int c) {
         if (f == x.length - 1 && c == x.length - 1) {
             System.out.print(x[f][c] + "");
@@ -173,8 +203,8 @@ public class ProyectoIntegrador2 {
         }
 
     }
-    
-     public static void validar(Piezas matriz[][], int x, int y) throws MiException {
+
+    public static void validar(Piezas matriz[][], int x, int y) throws MiException {
         int limit = matriz.length - 1;
         int limit2 = matriz[0].length - 1;
         if (x > limit || y > limit2) {
@@ -182,4 +212,22 @@ public class ProyectoIntegrador2 {
         }
     }
     
-}
+    public boolean comer(int f,int c,int dr,int dc,Piezas m[][])
+    {
+        if (m[f][c] instanceof Caballos) {
+            if (m[dr][dc] instanceof Peones||m[dr][dc] instanceof Alfiles||m[dr][dc]instanceof Dama||m[dr][dc] instanceof Caballos ||m[dr][dc] instanceof Rey) {
+               m[dr][dc] = new Vacio();
+               m [dr][dc] = new Caballos();
+               return true;
+                
+            }else{
+                return false;
+            }
+            
+                
+            }
+        return false;
+        }
+    }
+
+

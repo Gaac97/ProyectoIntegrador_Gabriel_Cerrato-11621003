@@ -19,39 +19,25 @@ public class Peones extends Piezas {
     }
 
     @Override
-    public int movimiento(String forma, int x, int y, Piezas[][] m, int a, int b) {
-        cont = 0;
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+       cont = 0;
         if (cont == 0) {
-            if (a - b == a) {
-                return 1;
+            if (f - c == dc) {
+                return true;
             } else {
-                return 2;
+                return  false;
             }
         } else {
-            return 2;
+            return false;
         }
     }
 
     @Override
-    public int comer(int x, int y, Piezas[][] m, int a, int b) {
-        int suma = a + b;
-        int resta = a - b;
-        int d = (a - 1) + b + 1;
-        int q = (a - 1) + b;
-        boolean evaluar = true;
-        if (cont == 0) {
-            if (q == suma) {
-                if ((a - 1) + (b + 1) == d) {
-                    return 1;
-                } else {
-                    return 2;
-                }
-            } else {
-                return 2;
-            }
-        } else {
-            return 2;
-        }
-
+    public boolean comer(int f, int c, int dc, int dr, Piezas[][] m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}
+    }
+
+   
+   
+

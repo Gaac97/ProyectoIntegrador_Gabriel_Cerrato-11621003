@@ -17,15 +17,30 @@ public class Alfiles extends Piezas{
     }
 
     @Override
-    public int movimiento(String forma, int x, int y, Piezas[][] m, int a, int b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+       if (f == dr || c == dc) {
+            
+            mensaje = "Solo se mueven en diagonal";
+            return false;
+            
+        }
+        
+        //se valida si el movimiento fue en forma diagonal
+        return movimiento(f, c, dc, dr, m);
+        
+    }    
 
     @Override
-    public int comer(int x, int y, Piezas[][] m, int a, int b) {
+    public boolean comer(int f, int c, int dc, int dr, Piezas[][] m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+        
+    }
 
-    
 
-}
+   
+
+
+
+ 
+
