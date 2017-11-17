@@ -66,8 +66,11 @@ public class ProyectoIntegrador2 {
                             m[dr][dc] = new Torres();
                         }
                     }
+                    if (t.comer(f, c, dc, dr, m)==true) {
+                        m[dr][dc] = new Vacio();
+                    }
                 } else if (m[f][c] instanceof Caballos) {
-                    if (ca.movimiento(f, c, dc, dr, m, s) == false && ca.movimientoX(f, dc, dr, dc, m, move) == false) {
+                    if (ca.movimiento(f, c, dc, dr, m, s) == false) {
 
                         if (ca.VerificarC(dr, dc, m) == true) {
                             m[f][c] = new Vacio();
@@ -75,14 +78,14 @@ public class ProyectoIntegrador2 {
                         }
                     }
                 } else if (m[f][c] instanceof Alfiles) {
-                    if (a.movimiento(f, c, dc, dr, m, s) == false && a.movimientoX(f, dc, dr, dc, m, move) == false) {
+                    if (a.movimiento(f, c, dc, dr, m, s) == false) {
 
                         m[f][c] = new Vacio();
                         m[dr][dc] = new Alfiles();
 
                     }
                 } else if (m[f][c] instanceof Peones) {
-                    if (p.movimiento(f, c, dc, dr, m, s) == false && p.movimientoX(f, dc, dr, dc, m, move) == false) {
+                    if (p.movimiento(f, c, dc, dr, m, s) == false) {
                         if (p.VerificarC(dr, dc, m) == false) {
                             m[f][c] = new Vacio();
                             m[dr][dc] = new Peones();
@@ -94,10 +97,13 @@ public class ProyectoIntegrador2 {
                             m[f][c] = new Vacio();
                             m[dr][dc] = new Dama();
                         }
+                        if (d.comer(f, c, dc, dr, m)==true) {
+                            m[dr][dc] = new Vacio();
+                        }
 
                     }
                 } else if (m[f][c] instanceof Rey) {
-                    if (r.movimiento(f, c, dc, dr, m, s) == false && r.movimientoX(f, dc, dr, dc, m, move) == true) {
+                    if (r.movimiento(f, c, dc, dr, m, s) == true ) {
                         if (r.VerificarC(dr, dc, m) == false) {
                             m[f][c] = new Vacio();
                             m[dr][dc] = new Rey();
@@ -107,6 +113,8 @@ public class ProyectoIntegrador2 {
 
                     JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna pieza");
                 }
+                cont++;
+                
             } else {
 
                 JOptionPane.showMessageDialog(null, "Turno de los negros:" + " " + player2);
@@ -131,6 +139,9 @@ public class ProyectoIntegrador2 {
                         if (t.VerificarC(dr, dc, m) == true) {
                             m[f][c] = new Vacio();
                             m[dr][dc] = new Torres();
+                            if (t.comer(f, c, dc, dr, m)==true) {
+                                m[dr][dc] = new Vacio();
+                            }
                         } else if (t.movimientoX(f, dc, dr, dc, m, move) == true) {
                             if (t.VerificarC(dr, dc, m) == true) {
                                 m[f][c] = new Vacio();
@@ -148,14 +159,14 @@ public class ProyectoIntegrador2 {
                         }
                     }
                 } else if (m[f][c] instanceof Alfiles) {
-                    if (a.movimiento(f, c, dc, dr, m, s) == false && a.movimientoX(f, dc, dr, dc, m, move) == false) {
+                    if (a.movimiento(f, c, dc, dr, m, s) == false ) {
 
                         m[f][c] = new Vacio();
                         m[dr][dc] = new Alfiles();
 
                     }
                 } else if (m[f][c] instanceof Peones) {
-                    if (p.movimiento(f, c, dc, dr, m, s) == false && p.movimientoX(f, dc, dr, dc, m, move) == false) {
+                    if (p.movimiento(f, c, dc, dr, m, s) == false ) {
                         if (p.VerificarC(dr, dc, m) == false) {
                             m[f][c] = new Vacio();
                             m[dr][dc] = new Peones();
@@ -175,7 +186,7 @@ public class ProyectoIntegrador2 {
 
                     }
                 } else if (m[f][c] instanceof Rey) {
-                    if (r.movimiento(f, c, dc, dr, m, s) == false && r.movimientoX(f, dc, dr, dc, m, move) == true) {
+                    if (r.movimiento(f, c, dc, dr, m, s) == false) {
                         if (r.VerificarC(dr, dc, m) == false) {
                             m[f][c] = new Vacio();
                             m[dr][dc] = new Rey();
