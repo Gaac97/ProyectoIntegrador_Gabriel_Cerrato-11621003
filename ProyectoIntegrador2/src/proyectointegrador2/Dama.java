@@ -17,21 +17,21 @@ public class Dama extends Piezas {
     }
 
     @Override
-    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
-     boolean axis = true;
-        
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m, boolean s) {
+
         if (f == dr ^ c == dc) {
-            axis = true;
+            return true;
+
         } else if (f != dr && c != dc) {
-            axis = false; //MOver diagonal
+            return true;
         } else {
-            
+
             mensaje = "Reina se puede mover en cualquier direccion";
+
             return false;
-            
+
         }
-        return movimiento(f, c, dc, dr, m);
-      
+
     }
 
     @Override

@@ -21,9 +21,9 @@ public  abstract class Piezas implements Movimientos {
   
     
     //Verifica si la celda esta vacia
-    private boolean VerificarC(int nuevaF, int newColumn, int[][] playerMatrix) {
+    protected boolean VerificarC(int dr, int dc, Piezas m[][]) {
         
-        if (playerMatrix[nuevaF][newColumn] != 0) {//Si no esta vacia
+        if (!m[dr][dc].equals(null)) {//Si no esta vacia
             
             mensaje = "La pieeza esta bloqueando el camino";
             return false;
@@ -34,17 +34,17 @@ public  abstract class Piezas implements Movimientos {
         
     }
     
-    protected boolean axisMove(int startRow, int empiezaC, int dr, int dc, int[][] playerMatrix, boolean straightAxis) {
+    protected boolean movimientoX(int f, int empiezaC, int dr, int dc, Piezas m[][], boolean move) {
         
-        if (straightAxis) {//Si se mueve en forma recta (torre , reina)
+        if (move) {//Si se mueve en forma recta (torre , reina)
             
-            if (( empiezaC== dc) && (startRow != dr)) {
+            if (( empiezaC== dc) && (f != dr)) {
                 
-                if (dr < startRow) {//Moverse norte
+                if (dr < f) {//Moverse norte
                     
-                    for (int newRow = (startRow - 1); newRow > dr; newRow--) {
+                    for (int newRow = (f - 1); newRow > dr; newRow--) {
                         
-                        if (!VerificarC(newRow, dc, playerMatrix)) {
+                        if (!VerificarC(newRow, dc, m)) {
                             return false;
                         }
                         
@@ -52,9 +52,9 @@ public  abstract class Piezas implements Movimientos {
                     
                 } else {
                     
-                    for (int newRow = (startRow + 1); newRow < dr; newRow++) {
+                    for (int newRow = (f + 1); newRow < dr; newRow++) {
                         
-                        if (!VerificarC(newRow, dc, playerMatrix)) {
+                        if (!VerificarC(newRow, dc, m)) {
                             return false;
                         }
                         
@@ -62,13 +62,13 @@ public  abstract class Piezas implements Movimientos {
                     
                 }
                 
-            } else if ((startRow == dr) && (empiezaC != dc)) {
+            } else if ((f == dr) && (empiezaC != dc)) {
                 
                 if (dc < empiezaC) {
                     
                     for (int newColumn = (empiezaC - 1); newColumn > dc; newColumn--) {
                         
-                        if (!VerificarC(dr, newColumn, playerMatrix)) {
+                        if (!VerificarC(dr, newColumn, m)) {
                             return false;
                         }
                         
@@ -78,7 +78,7 @@ public  abstract class Piezas implements Movimientos {
                     
                     for (int newColumn = (empiezaC + 1); newColumn < dc; newColumn++) {
                         
-                        if (!VerificarC(dr, newColumn, playerMatrix)) {
+                        if (!VerificarC(dr, newColumn, m)) {
                             return false;
                         }
                         
@@ -99,15 +99,15 @@ public  abstract class Piezas implements Movimientos {
             mensaje = "El destino es esta la misma diagonal";
             int newColumn = 0;
             
-            if (dr < startRow && dc < empiezaC) {
+            if (dr < f && dc < empiezaC) {
                 
-                if ((dr - startRow) == (dc - empiezaC)) {
+                if ((dr - f) == (dc - empiezaC)) {
                     
-                    for (int newRow = (startRow - 1); newRow > dr; newRow--) {
+                    for (int newRow = (f - 1); newRow > dr; newRow--) {
                         
-                        newColumn = empiezaC - (startRow - newRow);
+                        newColumn = empiezaC - (f - newRow);
                         
-                        if (!VerificarC(newRow, newColumn, playerMatrix)) {
+                        if (!VerificarC(newRow, newColumn, m)) {
                             return false;
                         }
                         
@@ -117,16 +117,16 @@ public  abstract class Piezas implements Movimientos {
                     return false;
                 }
                 
-            } else if (dr < startRow && dc > empiezaC) //si se mueve NE
+            } else if (dr <f && dc > empiezaC) //si se mueve NE
             {
                 
-                if ((dr - startRow) == (empiezaC- dc)) {
+                if ((dr - f) == (empiezaC- dc)) {
                     
-                    for (int newRow = (startRow - 1); newRow > dr; newRow--) {
+                    for (int newRow = (f- 1); newRow > dr; newRow--) {
                         
-                        newColumn = empiezaC + (startRow - newRow);
+                        newColumn = empiezaC + (f - newRow);
                         
-                        if (!VerificarC(newRow, newColumn, playerMatrix)) {
+                        if (!VerificarC(newRow, newColumn, m)) {
                             return false;
                         }
                         
@@ -136,16 +136,16 @@ public  abstract class Piezas implements Movimientos {
                     return false;
                 }
                 
-            } else if (dr > startRow && dc < empiezaC) //si se mueve SW
+            } else if (dr > f && dc < empiezaC) //si se mueve SW
             {
                 
-                if ((startRow - dr) == (dc - empiezaC)) {
+                if ((f - dr) == (dc - empiezaC)) {
                     
-                    for (int newRow = (startRow + 1); newRow < dr; newRow++) {
+                    for (int newRow = (f + 1); newRow < dr; newRow++) {
                         
-                        newColumn = empiezaC - (newRow - startRow);
+                        newColumn = empiezaC - (newRow -f);
                         
-                        if (!VerificarC(newRow, newColumn, playerMatrix)) {
+                        if (!VerificarC(newRow, newColumn, m)) {
                             return false;
                         }
                         
@@ -155,16 +155,16 @@ public  abstract class Piezas implements Movimientos {
                     return false;
                 }
                 
-            } else if (dr > startRow && dc > empiezaC) //si se mueve SE
+            } else if (dr > f && dc > empiezaC) //si se mueve SE
             {
                 
-                if ((startRow - dr) == (empiezaC - dc)) {
+                if ((f - dr) == (empiezaC - dc)) {
                     
-                    for (int newRow = (startRow + 1); newRow < dr; newRow++) {
+                    for (int newRow = (f+ 1); newRow < dr; newRow++) {
                         
-                        newColumn = empiezaC + (newRow - startRow);
+                        newColumn = empiezaC + (newRow - f);
                         
-                        if (!VerificarC(newRow, newColumn, playerMatrix)) {
+                        if (!VerificarC(newRow, newColumn, m)) {
                             return false;
                         }
                         

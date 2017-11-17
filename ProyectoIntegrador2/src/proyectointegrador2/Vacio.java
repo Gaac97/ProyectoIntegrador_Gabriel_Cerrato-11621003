@@ -17,7 +17,7 @@ public class Vacio extends Piezas {
     }
 
     @Override
-    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m,boolean s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

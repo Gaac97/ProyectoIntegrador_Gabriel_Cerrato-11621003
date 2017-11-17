@@ -10,6 +10,6 @@ package proyectointegrador2;
  * @author Gabriel Alvarado
  */
 public interface Movimientos {
-  public boolean movimiento(int f,int c, int dc, int dr, Piezas m[][]);
+  public boolean movimiento(int f,int c, int dc, int dr, Piezas m[][],boolean axis);
     public boolean comer(int f,int c, int dc, int dr, Piezas m[][]);    
 }

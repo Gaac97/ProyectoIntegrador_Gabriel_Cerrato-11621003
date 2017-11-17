@@ -17,7 +17,7 @@ public class Alfiles extends Piezas{
     }
 
     @Override
-    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m,boolean s) {
        if (f == dr || c == dc) {
             
             mensaje = "Solo se mueven en diagonal";
@@ -26,7 +26,7 @@ public class Alfiles extends Piezas{
         }
         
         //se valida si el movimiento fue en forma diagonal
-        return movimiento(f, c, dc, dr, m);
+        return movimiento(f, c, dc, dr, m,s);
         
     }    
 

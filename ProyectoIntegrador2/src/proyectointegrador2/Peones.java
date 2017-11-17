@@ -19,7 +19,7 @@ public class Peones extends Piezas {
     }
 
     @Override
-    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m,boolean s) {
        cont = 0;
         if (cont == 0) {
             if (f - c == dc) {

@@ -17,7 +17,7 @@ public class Rey extends Piezas {
     }
 
     @Override
-    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m,boolean s) {
         ff = dr;
         fc = dc;
 

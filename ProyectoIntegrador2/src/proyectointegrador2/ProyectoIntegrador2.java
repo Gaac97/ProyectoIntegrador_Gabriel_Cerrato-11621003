@@ -22,13 +22,14 @@ public class ProyectoIntegrador2 {
         Rey r = new Rey();
         Peones p = new Peones();
         Alfiles a = new Alfiles();
-
+        boolean move = false;
         int turno;
         int cont = 0;
         boolean turn = false;
         boolean finish = false;
         String player1;
         String player2;
+        boolean s = false;
         Piezas m[][] = new Piezas[8][8];
 
         LlenarTablero(m);
@@ -47,63 +48,148 @@ public class ProyectoIntegrador2 {
                 int c = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
                 int dr = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
                 int dc = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                try {
+                    validar(m, f, c);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                try {
+                    validar(m, dr, dc);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
 
                 if (m[f][c] instanceof Torres) {
-                    t.movimiento(f, c, dc, dr, m);
-                    m[f][c] = new Vacio();
-                    m[dr][dc] = new Torres();
+                    if (t.movimiento(f, c, dc, dr, m, s) == false && t.movimientoX(f, dc, dr, dc, m, move) == false) {
+                        if (t.VerificarC(dr, dc, m) == true) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Torres();
+                        }
+                    }
                 } else if (m[f][c] instanceof Caballos) {
-                    ca.movimiento(f, c, dc, dr, m);
+                    if (ca.movimiento(f, c, dc, dr, m, s) == false && ca.movimientoX(f, dc, dr, dc, m, move) == false) {
 
-                    m[f][c] = new Vacio();
-                    m[dr][dc] = new Caballos();
-                    
+                        if (ca.VerificarC(dr, dc, m) == true) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Caballos();
+                        }
+                    }
                 } else if (m[f][c] instanceof Alfiles) {
-                    a.movimiento(f, c, dc, dr, m);
-                    m[f][c] = new Vacio();
-                    m[dr][dc] = new Alfiles();
+                    if (a.movimiento(f, c, dc, dr, m, s) == false && a.movimientoX(f, dc, dr, dc, m, move) == false) {
 
+                        m[f][c] = new Vacio();
+                        m[dr][dc] = new Alfiles();
+
+                    }
                 } else if (m[f][c] instanceof Peones) {
-                    p.movimiento(f, c, dc, dr, m);
-                    m[f][c] = new Vacio();
-                    m[dr][dc] = new Peones();
+                    if (p.movimiento(f, c, dc, dr, m, s) == false && p.movimientoX(f, dc, dr, dc, m, move) == false) {
+                        if (p.VerificarC(dr, dc, m) == false) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Peones();
+                        }
+                    }
+                } else if (m[f][c] instanceof Dama) {
+                    if (d.movimiento(f, c, dc, dr, m, s) == true && d.movimientoX(f, dc, dr, dc, m, move) == false) {
+                        if (d.VerificarC(dr, dc, m) == false) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Dama();
+                        }
 
-                }
-                {
-                    {
                     }
-                    try {
-                        validar(m, f, c);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                } else if (m[f][c] instanceof Rey) {
+                    if (r.movimiento(f, c, dc, dr, m, s) == false && r.movimientoX(f, dc, dr, dc, m, move) == true) {
+                        if (r.VerificarC(dr, dc, m) == false) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Rey();
+                        }
                     }
-                    try {
-                        validar(m, dr, dc);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna pieza");
                 }
             } else {
 
                 JOptionPane.showMessageDialog(null, "Turno de los negros:" + " " + player2);
                 System.out.println("\n");
 
-                int i = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada x"));
-                int i2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
-                int i3 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
-                int i4 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                int f = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada x"));
+                int c = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la coordenada y"));
+                int dr = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                int dc = Integer.parseInt(JOptionPane.showInputDialog("Ingrese donde desea mover la pieza"));
+                try {
+                    validar(m, f, c);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                try {
+                    validar(m, dr, dc);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                if (m[f][c] instanceof Torres) {
+                    if (t.movimiento(f, c, dc, dr, m, s)==false&&t.movimientoX(f, dc, dr, dc, m, move) == false) {
+                        if (t.VerificarC(dr, dc, m) == true) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Torres();
+                        } else if (t.movimientoX(f, dc, dr, dc, m, move) == true) {
+                            if (t.VerificarC(dr, dc, m) == true) {
+                                m[f][c] = new Vacio();
+                                m[dr][dc] = new Torres();
+                            }
+                        }
+
+                    }
+                } else if (m[f][c] instanceof Caballos) {
+                    if (ca.movimiento(f, c, dc, dr, m, s) == false && ca.movimientoX(f, dc, dr, dc, m, move) == false) {
+
+                        if (ca.VerificarC(dr, dc, m) == true) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Caballos();
+                        }
+                    }
+                } else if (m[f][c] instanceof Alfiles) {
+                    if (a.movimiento(f, c, dc, dr, m, s) == false && a.movimientoX(f, dc, dr, dc, m, move) == false) {
+
+                        m[f][c] = new Vacio();
+                        m[dr][dc] = new Alfiles();
+
+                    }
+                } else if (m[f][c] instanceof Peones) {
+                    if (p.movimiento(f, c, dc, dr, m, s) == false && p.movimientoX(f, dc, dr, dc, m, move) == false) {
+                        if (p.VerificarC(dr, dc, m) == false) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Peones();
+                        }
+                    }
+                } else if (m[f][c] instanceof Dama) {
+                 if (t.movimientoX(f, dc, dr, dc, m, move) == false) {
+                        if (t.VerificarC(dr, dc, m) == true) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Dama();
+                        } else if (t.movimientoX(f, dc, dr, dc, m, move) == true) {
+                            if (t.VerificarC(dr, dc, m) == true) {
+                                m[f][c] = new Vacio();
+                                m[dr][dc] = new Dama();
+                            }
+                        }
+
+                    }
+                } else if (m[f][c] instanceof Rey) {
+                    if (r.movimiento(f, c, dc, dr, m, s) == false && r.movimientoX(f, dc, dr, dc, m, move) == true) {
+                        if (r.VerificarC(dr, dc, m) == false) {
+                            m[f][c] = new Vacio();
+                            m[dr][dc] = new Rey();
+                        }
+                    }
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna pieza");
+                }
             }
+
         }
-    
+
     }
-
-
-    
-    
-
-    
-
-    
 
     public static void LlenarTablero(Piezas m[][]) {
         Rey r = new Rey();
@@ -211,23 +297,19 @@ public class ProyectoIntegrador2 {
             throw new MiException("Se salio del limite");
         }
     }
-    
-    public boolean comer(int f,int c,int dr,int dc,Piezas m[][])
-    {
+
+    public boolean comer(int f, int c, int dr, int dc, Piezas m[][]) {
         if (m[f][c] instanceof Caballos) {
-            if (m[dr][dc] instanceof Peones||m[dr][dc] instanceof Alfiles||m[dr][dc]instanceof Dama||m[dr][dc] instanceof Caballos ||m[dr][dc] instanceof Rey) {
-               m[dr][dc] = new Vacio();
-               m [dr][dc] = new Caballos();
-               return true;
-                
-            }else{
+            if (m[dr][dc] instanceof Peones || m[dr][dc] instanceof Alfiles || m[dr][dc] instanceof Dama || m[dr][dc] instanceof Caballos || m[dr][dc] instanceof Rey) {
+                m[dr][dc] = new Vacio();
+                m[dr][dc] = new Caballos();
+                return true;
+
+            } else {
                 return false;
             }
-            
-                
-            }
-        return false;
+
         }
+        return false;
     }
-
-
+}

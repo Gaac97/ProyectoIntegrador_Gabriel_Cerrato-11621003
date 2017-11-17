@@ -17,17 +17,17 @@ public class Torres extends Piezas{
     }
 
     @Override
-    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m) {
+    public boolean movimiento(int f, int c, int dc, int dr, Piezas[][] m,boolean s) {
      if (f != dr && c != dc) //Si se mueve en diagonal
         {
             
-            mensaje = "Torre solo se puede mover en horinzotal o vertical";
+            mensaje = "Torre solo se puede mover en horinzontal o vertical";
             return false;
             
         }
        //La reina comparte el mismo movimiento como  un alfil o una torre, para eso se valida el movimiento como 
         
-        return movimiento(f, c, dc, dr, m);
+        return movimiento(f, c, dc, dr, m, s);
         
     }
 
